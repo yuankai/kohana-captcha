@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access.');
+<?php
+
+defined('SYSPATH') OR die('No direct access.');
+
 /**
  * Alpha captcha class.
  *
@@ -9,8 +12,8 @@
  * @copyright	(c) 2008-2010 Kohana Team
  * @license		http://kohanaphp.com/license.html
  */
-class Captcha_Alpha extends Captcha 
-{
+class Captcha_Alpha extends Captcha {
+
 	/**
 	 * Generates a new Captcha challenge.
 	 *
@@ -20,7 +23,7 @@ class Captcha_Alpha extends Captcha
 	{
 		// Complexity setting is used as character count
 		$text = text::random('distinct', max(1, Captcha::$config['complexity']));
-		
+
 		// Complexity setting is used as character count
 		return $text;
 	}
@@ -45,7 +48,7 @@ class Captcha_Alpha extends Captcha
 		}
 
 		// Add a few random circles
-		for ($i = 0, $count = mt_rand(10, Captcha::$config['complexity'] * 3); $i < $count; $i++)
+		for ($i = 0, $count = mt_rand(10, Captcha::$config['complexity'] * 3); $i < $count; $i ++ )
 		{
 			$color = imagecolorallocatealpha($this->image, mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255), mt_rand(80, 120));
 			$size = mt_rand(5, Captcha::$config['height'] / 3);
@@ -61,7 +64,7 @@ class Captcha_Alpha extends Captcha
 		$chars = 'ABEFGJKLPQRTVY';
 
 		// Draw each Captcha character with varying attributes
-		for ($i = 0, $strlen = strlen($this->response); $i < $strlen; $i++)
+		for ($i = 0, $strlen = strlen($this->response); $i < $strlen; $i ++ )
 		{
 			// Use different fonts if available
 			$font = Captcha::$config['fontpath'].Captcha::$config['fonts'][array_rand(Captcha::$config['fonts'])];
@@ -92,4 +95,6 @@ class Captcha_Alpha extends Captcha
 		return $this->image_render($html);
 	}
 
-} // End Captcha Alpha Driver Class
+}
+
+// End Captcha Alpha Driver Class

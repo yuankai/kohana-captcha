@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access.');
+<?php
+
+defined('SYSPATH') OR die('No direct access.');
+
 /**
  * Black captcha class.
  *
@@ -9,8 +12,8 @@
  * @copyright	(c) 2008-2010 Kohana Team
  * @license		http://kohanaphp.com/license.html
  */
-class Captcha_Black extends Captcha
-{
+class Captcha_Black extends Captcha {
+
 	/**
 	 * Generates a new Captcha challenge.
 	 *
@@ -20,7 +23,7 @@ class Captcha_Black extends Captcha
 	{
 		// Complexity setting is used as character count
 		$text = text::random('distinct', max(1, ceil(Captcha::$config['complexity'] / 1.5)));
-		
+
 		return $text;
 	}
 
@@ -38,7 +41,7 @@ class Captcha_Black extends Captcha
 		// Add random white/gray arcs, amount depends on complexity setting
 		$count = (Captcha::$config['width'] + Captcha::$config['height']) / 2;
 		$count = $count / 5 * min(10, Captcha::$config['complexity']);
-		for ($i = 0; $i < $count; $i++)
+		for ($i = 0; $i < $count; $i ++ )
 		{
 			imagesetthickness($this->image, mt_rand(1, 2));
 			$color = imagecolorallocatealpha($this->image, 255, 255, 255, mt_rand(0, 120));
@@ -57,11 +60,11 @@ class Captcha_Black extends Captcha
 		imagefttext($this->image, $size, $angle, $x + 1, $y + 1, $color, $font, $this->response);
 
 		// Add more shadows for lower complexities
-		(Captcha::$config['complexity'] < 10) and imagefttext($this->image, $size, $angle, $x - 1, $y - 1, $color, $font , $this->response);
-		(Captcha::$config['complexity'] < 8)  and imagefttext($this->image, $size, $angle, $x - 2, $y + 2, $color, $font , $this->response);
-		(Captcha::$config['complexity'] < 6)  and imagefttext($this->image, $size, $angle, $x + 2, $y - 2, $color, $font , $this->response);
-		(Captcha::$config['complexity'] < 4)  and imagefttext($this->image, $size, $angle, $x + 3, $y + 3, $color, $font , $this->response);
-		(Captcha::$config['complexity'] < 2)  and imagefttext($this->image, $size, $angle, $x - 3, $y - 3, $color, $font , $this->response);
+		(Captcha::$config['complexity'] < 10) and imagefttext($this->image, $size, $angle, $x - 1, $y - 1, $color, $font, $this->response);
+		(Captcha::$config['complexity'] < 8) and imagefttext($this->image, $size, $angle, $x - 2, $y + 2, $color, $font, $this->response);
+		(Captcha::$config['complexity'] < 6) and imagefttext($this->image, $size, $angle, $x + 2, $y - 2, $color, $font, $this->response);
+		(Captcha::$config['complexity'] < 4) and imagefttext($this->image, $size, $angle, $x + 3, $y + 3, $color, $font, $this->response);
+		(Captcha::$config['complexity'] < 2) and imagefttext($this->image, $size, $angle, $x - 3, $y - 3, $color, $font, $this->response);
 
 		// Finally draw the foreground characters
 		$color = imagecolorallocate($this->image, 0, 0, 0);
@@ -71,4 +74,6 @@ class Captcha_Black extends Captcha
 		return $this->image_render($html);
 	}
 
-} // End Captcha Black Driver Class
+}
+
+// End Captcha Black Driver Class

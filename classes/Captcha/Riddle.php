@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access.');
+<?php
+
+defined('SYSPATH') OR die('No direct access.');
+
 /**
  * Riddle captcha class.
  *
@@ -9,8 +12,8 @@
  * @copyright	(c) 2008-2010 Kohana Team
  * @license		http://kohanaphp.com/license.html
  */
-class Captcha_Riddle extends Captcha
-{
+class Captcha_Riddle extends Captcha {
+
 	/**
 	 * @var string Captcha riddle
 	 */
@@ -47,4 +50,6 @@ class Captcha_Riddle extends Captcha
 		return $this->riddle;
 	}
 
-} // End Captcha Riddle Driver Class
+}
+
+// End Captcha Riddle Driver Class

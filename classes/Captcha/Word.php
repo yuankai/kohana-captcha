@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access.');
+<?php
+
+defined('SYSPATH') OR die('No direct access.');
+
 /**
  * Word captcha class.
  *
@@ -9,8 +12,8 @@
  * @copyright	(c) 2008-2010 Kohana Team
  * @license		http://kohanaphp.com/license.html
  */
-class Captcha_Word extends Captcha_Basic
-{
+class Captcha_Word extends Captcha_Basic {
+
 	/**
 	 * Generates a new Captcha challenge.
 	 *
@@ -29,9 +32,11 @@ class Captcha_Word extends Captcha_Basic
 			if (abs(Captcha::$config['complexity'] - strlen($word)) < 2)
 				return strtoupper($word);
 		}
-		
+
 		// Return any random word as final fallback
 		return strtoupper($words[array_rand($words)]);
 	}
 
-} // End Captcha Word Driver Class
+}
+
+// End Captcha Word Driver Class

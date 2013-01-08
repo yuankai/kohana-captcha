@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access.');
+<?php
+
+defined('SYSPATH') OR die('No direct access.');
+
 /**
  * Math captcha class.
  *
@@ -9,8 +12,8 @@
  * @copyright  (c) 2008-2010 Kohana Team
  * @license    http://kohanaphp.com/license.html
  */
-class Captcha_Math extends Captcha
-{
+class Captcha_Math extends Captcha {
+
 	/**
 	 * @var string Captcha math exercise
 	 */
@@ -61,4 +64,6 @@ class Captcha_Math extends Captcha
 		return $this->math_exercise;
 	}
 
-} // End Captcha Math Driver Class
+}
+
+// End Captcha Math Driver Class

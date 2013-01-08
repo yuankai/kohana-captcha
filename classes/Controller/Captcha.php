@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access allowed.');
+<?php
+
+defined('SYSPATH') OR die('No direct access allowed.');
+
 /**
  * Outputs the dynamic Captcha resource.
  * Usage: Call the Captcha controller from a view, e.g.
@@ -17,7 +20,7 @@ class Controller_Captcha extends Controller {
 
 	/**
 	 * @var boolean Auto render template
-	 **/
+	 * */
 	public $auto_render = FALSE;
 
 	/**
@@ -31,10 +34,12 @@ class Controller_Captcha extends Controller {
 		// Pull the config group name from the URL
 		Captcha::instance($group)->render(FALSE);
 	}
-	
+
 	public function after()
 	{
 		Captcha::instance()->update_response_session();
 	}
 
-} // End Captcha_Controller
+}
+
+// End Captcha_Controller

@@ -1,4 +1,7 @@
-<?php defined('SYSPATH') OR die('No direct access.');
+<?php
+
+defined('SYSPATH') OR die('No direct access.');
+
 /**
  * Captcha abstract class.
  *
@@ -8,8 +11,8 @@
  * @copyright	(c) 2008-2010 Kohana Team
  * @license		http://kohanaphp.com/license.html
  */
-abstract class Captcha
-{
+abstract class Captcha {
+
 	/**
 	 * @var object Captcha singleton
 	 */
@@ -24,15 +27,15 @@ abstract class Captcha
 	 * @var array Default config values
 	 */
 	public static $config = array
-	(
-		'style'      	=> 'basic',
-		'width'      	=> 150,
-		'height'     	=> 50,
-		'complexity' 	=> 4,
-		'background' 	=> '',
-		'fontpath'   	=> '',
-		'fonts'      	=> array(),
-		'promote'    	=> FALSE,
+	    (
+	    'style' => 'basic',
+	    'width' => 150,
+	    'height' => 50,
+	    'complexity' => 4,
+	    'background' => '',
+	    'fontpath' => '',
+	    'fonts' => array(),
+	    'promote' => FALSE,
 	);
 
 	/**
@@ -97,7 +100,7 @@ abstract class Captcha
 		// Load and validate config group
 		if ( ! is_array($config = Kohana::config('captcha')->get($group)))
 			throw new Kohana_Exception('Captcha group not defined in :group configuration',
-					array(':group' => $group));
+				array(':group' => $group));
 
 		// All captcha config groups inherit default config group
 		if ($group !== 'default')
@@ -342,13 +345,11 @@ abstract class Captcha
 
 			// Resize the image if needed
 			if (imagesx($this->background_image) !== Captcha::$config['width']
-			    or imagesy($this->background_image) !== Captcha::$config['height'])
+				or imagesy($this->background_image) !== Captcha::$config['height'])
 			{
 				imagecopyresampled
-				(
-					$this->image, $this->background_image, 0, 0, 0, 0,
-					Captcha::$config['width'], Captcha::$config['height'],
-					imagesx($this->background_image), imagesy($this->background_image)
+					(
+					$this->image, $this->background_image, 0, 0, 0, 0, Captcha::$config['width'], Captcha::$config['height'], imagesx($this->background_image), imagesy($this->background_image)
 				);
 			}
 
@@ -396,21 +397,21 @@ abstract class Captcha
 
 		if ($direction === 'horizontal')
 		{
-			$x1 =& $i;
+			$x1 = & $i;
 			$y1 = 0;
-			$x2 =& $i;
+			$x2 = & $i;
 			$y2 = Captcha::$config['height'];
 		}
 		else
 		{
 			$x1 = 0;
-			$y1 =& $i;
+			$y1 = & $i;
 			$x2 = Captcha::$config['width'];
-			$y2 =& $i;
+			$y2 = & $i;
 		}
 
 		// Execute the gradient loop
-		for ($i = 0; $i <= $steps; $i++)
+		for ($i = 0; $i <= $steps; $i ++ )
 		{
 			$r2 = $color1['red'] - floor($i * $r1);
 			$g2 = $color1['green'] - floor($i * $g1);
@@ -434,10 +435,10 @@ abstract class Captcha
 			return '<img src="'.url::site('captcha/'.Captcha::$config['group']).'" width="'.Captcha::$config['width'].'" height="'.Captcha::$config['height'].'" alt="Captcha" class="captcha" />';
 
 		// Send the correct HTTP header
-        Request::instance()->headers['Content-Type'] = 'image/'.$this->image_type;
-        Request::instance()->headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0';
-        Request::instance()->headers['Pragma'] = 'no-cache';
-        Request::instance()->headers['Connection'] = 'close';
+		Request::instance()->headers['Content-Type'] = 'image/'.$this->image_type;
+		Request::instance()->headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0';
+		Request::instance()->headers['Pragma'] = 'no-cache';
+		Request::instance()->headers['Connection'] = 'close';
 
 		// Pick the correct output function
 		$function = 'image'.$this->image_type;
@@ -463,5 +464,6 @@ abstract class Captcha
 	 * @return mixed
 	 */
 	abstract public function render($html = TRUE);
+}
 
-} // End Captcha Class
+// End Captcha Class
